@@ -1,6 +1,6 @@
-# IgnotonMap
+# 🗺️ IgnotonMap
 
-IgnotonMap은 당신의 `추적당하지 않을 권리`를 존중하여 위치정보를 요구하지 않고 양질의 지도서비스를 제공하는 것을 목표로 합니다.
+🗺️ IgnotonMap은 당신의 `추적당하지 않을 권리`를 존중하여 위치정보를 요구하지 않고 양질의 지도서비스를 제공하는 것을 목표로 합니다.
 이를 통해 개인정보를 중요시하는 분들에게 안심하고 지도를 둘러보는 것에 도움을 주고자 합니다.
 
 > IgnotonMap Project에 도움을 주시고 싶으신가요? <br>
@@ -29,10 +29,10 @@ Random, KR 처럼 국가코드와 랜덤한 위치로 지도를 시작합니다.
 
 
 
-# IgnotonMap
+# 🗺️ IgnotonMap
 
 
-IgnotonMap respects your ‘right not to be tracked’ and aims to provide high-quality map services without requesting location information.
+🗺️ IgnotonMap respects your 'Right NOT to be Tracked' and aims to provide high-quality map services without requesting location information.
 Through this, we hope to help those who value their personal information browse the map with confidence.
 
 > Would you like to help the IgnotonMap Project? <br>
