@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IgnotonMap</title>
+  <link rel="stylesheet" href="https://webfontworld.github.io/TheJamsil/TheJamsil.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "TheJamsil", sans-serif;
+    }
+
+    #header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 43px;
+      background-color: #FF7878;
+      color: #ffffff;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 4px; /* 로고와 정보 아이콘 간 여백을 조정하기 위한 패딩 추가 */
+    }
+
+    #logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    #info-icon {
+      color: #FFF;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    #map {
+      position: absolute;
+      top: 43px;
+      left: 0;
+      right: 0;
+      bottom: 30px;
+      cursor: crosshair;
+    }
+
+    #footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 30px;
+      background-color: #FF7878;
+      color: #ffffff;
+      text-align: center;
+      line-height: 30px;
+    }
+
+    #footer-icons {
+      display: flex;
+      justify-content: center;
+    }
+
+    #footer-icons a {
+      margin: 0 15px;
+    }
+
+    #footer-icons i {
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    #github-icon {
+      color: #010409;
+    }
+
+    #google-icon {
+      color: #4285f4;
+    }
+
+    #naver-icon {
+      color: #2eb500;
+    }
+
+    #yandex-icon {
+      color: #f43c1b;
+    }
+
+    #toss-icon {
+      color: #0064ff;
+    }
+
+    #footer-icons i:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+<div id="header">
+  <div id="logo">IgnotonMap</div>
+  <div id="info-icon" onclick="redirectToInfoPage()"><i class="fa-solid fa-circle-info"></i></div>
+</div>
+
+<div id="map"></div>
+
+<div id="footer">
+  <div id="footer-icons">
+    <a id="github-icon" href="https://github.com/JisungEda55/IgnotonMap" target="_blank"><i class="fa-brands fa-github"></i></a>
+    <a id="google-icon" href="https://maps.google.com/" target="_blank"><i class="fa-brands fa-google"></i></a>
+    <a id="naver-icon" href="https://maps.naver.com/" target="_blank"><i class="fa-brands fa-neos"></i></a>
+    <a id="yandex-icon" href="https://yandex.ru/maps/" target="_blank"><i class="fa-brands fa-yandex"></i></a>
+    <a id="toss-icon" href="https://toss.me/jisungeda" target="_blank"><i class="fa-solid fa-circle-dollar-to-slot"></i></a>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+<script>
+var map = L.map('map').setView([0, 0], 2);
+var markers = [];
+
+function setMapToCountryCapital() {
+  fetch('https://ipapi.co/json/')
+    .then(response => response.json())
+    .then(data => {
+      var countryCode = data.country;
+      fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`)
+        .then(response => response.json())
+        .then(countryData => {
+          var capitalCoordinates = countryData[0].latlng;
+          map.setView(capitalCoordinates, 10);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+          }).addTo(map);
+
+          var marker = L.marker(capitalCoordinates).addTo(map);
+          marker.bindPopup(`Random, ${countryCode}`).openPopup();
+          markers.push(marker);
+        })
+        .catch(error => console.error('Error retrieving country data:', error));
+    })
+    .catch(error => console.error('Error retrieving user location data:', error));
+}
+
+setMapToCountryCapital();
+
+map.on('move', function () {
+  map.closePopup();
+});
+
+map.on('contextmenu', function (e) {
+  var coordinates = e.latlng;
+  var marker = L.marker(coordinates).addTo(map);
+  marker.bindPopup(`Coordinates: ${coordinates.lat.toFixed(4)}, ${coordinates.lng.toFixed(4)}`).openPopup();
+  markers.push(marker);
+});
+
+map.on('popupopen', function (e) {
+  var popupMarker = e.popup._source;
+  popupMarker.on('contextmenu', function () {
+    map.closePopup();
+    markers = markers.filter(marker => marker !== popupMarker);
+    map.removeLayer(popupMarker);
+  });
+});
+
+function redirectToInfoPage() {
+  window.location.href = "https://github.com/JisungEda55/IgnotonMap/blob/main/README.md";
+}
+</script>
+
+</body>
+</html>
