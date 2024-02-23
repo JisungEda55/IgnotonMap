@@ -28,9 +28,10 @@ Random, KR 처럼 국가코드와 랜덤한 위치로 지도를 시작합니다.
 
 유튜버, 스트리머 등 지도가 필요하지만 자신의 위치를 노출하기 꺼리시는 분들에게 도움이 될 것 같습니다.
 
-🇺🇸 🇬🇧 🇨🇦 🇫🇷 🇩🇪 🇮🇹 🇪🇸 🇷🇺 🇧🇷 🇦🇷 🇿🇦 🇦🇺 🇮🇳 🇰🇷
 
-#IgnotonMap
+
+
+# IgnotonMap
 
 <img src="./assets/logo.svg" width="150" align="right" style="margin:0 0 0 20px">
 
