@@ -8,6 +8,7 @@
 > IgnotonMap Project에 도움을 주시고 싶으신가요? <br>
 >
 > - [개발자 후원하기 - 토스](https://toss.me/jisungeda)
+> - 이름에 IGNT를 추가해 주세요! 
 
 ## 🚩 이정표 MileStone
 
@@ -41,6 +42,7 @@ Through this, we hope to help those who value their personal information browse 
 > Would you like to help the IgnotonMap Project? <br>
 >
 > - [Support Developer - Toss](https://toss.me/jisungeda)
+> - Input IGNT word on yout Name!
 
 ## 🚩 Milestone MileStone
 
