@@ -26,7 +26,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 4px; /* 로고와 정보 아이콘 간 여백을 조정하기 위한 패딩 추가 */
+      padding: 0 4px;
     }
 
     #logo {
@@ -38,6 +38,7 @@
       color: #FFF;
       font-size: 24px;
       cursor: pointer;
+      margin-right: 10px;
     }
 
     #map {
@@ -64,38 +65,58 @@
     #footer-icons {
       display: flex;
       justify-content: center;
+      color: #FFF;
     }
 
     #footer-icons a {
       margin: 0 15px;
+      color: #FFF;
     }
 
-    #footer-icons i {
-      font-size: 20px;
+    #footer-icons img {
+      width: 28px; /* 이미지 크기 조절 */
+      height: 30px;
+      cursor: pointer;
+    }
+
+    #footer-logo {
+      display: flex;
+      align-items: center;
+      margin-left: 15px;
+    }
+
+    #footer-logo img {
+      width: 30px; /* 이미지 크기 조절 */
+      height: 30px;
+      margin-right: 5px;
+    }
+
+    #footer-logo span {
       cursor: pointer;
     }
 
     #github-icon {
-      color: #010409;
+      background: none; /* 배경 삭제 */
     }
 
     #google-icon {
-      color: #4285f4;
+      background: none; /* 배경 삭제 */
     }
 
     #naver-icon {
-      color: #2eb500;
+      background: none; /* 배경 삭제 */
     }
 
     #yandex-icon {
-      color: #f43c1b;
+      background: none; /* 배경 삭제 */
     }
 
     #toss-icon {
-      color: #0064ff;
+      background: none; /* 배경 삭제 */
     }
 
-    #footer-icons i:hover {
+    #footer-icons img:hover,
+    #footer-logo span:hover {
       opacity: 0.8;
     }
   </style>
@@ -113,9 +134,13 @@
   <div id="footer-icons">
     <a id="github-icon" href="https://github.com/JisungEda55/IgnotonMap" target="_blank"><i class="fa-brands fa-github"></i></a>
     <a id="google-icon" href="https://maps.google.com/" target="_blank"><i class="fa-brands fa-google"></i></a>
-    <a id="naver-icon" href="https://maps.naver.com/" target="_blank"><i class="fa-brands fa-neos"></i></a>
+    <a id="naver-icon" href="#" onclick="showAlertAndRedirect()"><img src="https://cdn-icons-png.flaticon.com/512/317/317314.png" alt="Naver"></a>
     <a id="yandex-icon" href="https://yandex.ru/maps/" target="_blank"><i class="fa-brands fa-yandex"></i></a>
     <a id="toss-icon" href="https://toss.me/jisungeda" target="_blank"><i class="fa-solid fa-circle-dollar-to-slot"></i></a>
+  </div>
+  <div id="footer-logo">
+    <img src="https://cdn-icons-png.flaticon.com/512/317/317314.png" alt="Logo">
+    <span onclick="showAlertAndRedirect()">KR</span>
   </div>
 </div>
 
@@ -172,6 +197,25 @@ map.on('popupopen', function (e) {
 
 function redirectToInfoPage() {
   window.location.href = "https://github.com/JisungEda55/IgnotonMap/blob/main/README.md";
+}
+
+function showAlertAndRedirect() {
+  var topLeft = [37.603801, 126.732023];
+  var topRight = [38.392232, 128.383237];
+  var bottomRight = [35.467807, 129.208844];
+  var bottomLeft = [35.004916, 126.878953];
+  var randomCoordinate = getRandomCoordinate(topLeft, topRight, bottomRight, bottomLeft);
+
+  alert("IgnotonCoordinates의 보안이 적용된 랜덤한 위치에서 네이버맵을 시작할게요. :)");
+  setTimeout(function () {
+    window.location.href = `https://map.naver.com/?query=${randomCoordinate[0]},${randomCoordinate[1]}&level=10`;
+  }, 1000); // 1초 후에 리다이렉트
+}
+
+function getRandomCoordinate(topLeft, topRight, bottomRight, bottomLeft) {
+  var latitude = Math.random() * (topLeft[0] - bottomLeft[0]) + bottomLeft[0];
+  var longitude = Math.random() * (topRight[1] - topRight[1]) + topRight[1];
+  return [latitude, longitude];
 }
 </script>
 
